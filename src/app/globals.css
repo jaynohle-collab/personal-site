@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+:root {
+  --paper: #f4efe6;
+  --paper-raised: #faf7f1;
+  --ink: #2c2620;
+  --ink-muted: #6b6258;
+  --ink-soft: #8f857a;
+  --line: #e0d6c8;
+  --accent: #8b5e3c;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-raised: var(--paper-raised);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-soft: var(--ink-soft);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --font-serif: var(--font-newsreader);
+  --font-sans: var(--font-source-sans);
+}
+
+html {
+  background: var(--paper);
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+::selection {
+  background: #e8d3bc;
+  color: var(--ink);
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fade-up 0.7s ease-out both;
+}
+
+.site-stack > .fade-in:nth-child(1) {
+  animation-delay: 0ms;
+}
+.site-stack > .fade-in:nth-child(2) {
+  animation-delay: 70ms;
+}
+.site-stack > .fade-in:nth-child(3) {
+  animation-delay: 130ms;
+}
+.site-stack > .fade-in:nth-child(4) {
+  animation-delay: 190ms;
+}
+.site-stack > .fade-in:nth-child(5) {
+  animation-delay: 250ms;
+}
+.site-stack > .fade-in:nth-child(6) {
+  animation-delay: 310ms;
+}
+.site-stack > .fade-in:nth-child(7) {
+  animation-delay: 370ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-in {
+    animation: none;
+  }
+}
