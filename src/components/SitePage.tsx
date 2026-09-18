@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { site } from "@content/site";
 import { ArrowUpRight } from "@/components/icons";
@@ -12,6 +13,7 @@ const NAV = [
   { id: "about", label: "About" },
   { id: "experience", label: "Experience" },
   { id: "projects", label: "Projects" },
+  { id: "moments", label: "Moments" },
   { id: "contact", label: "Contact" },
 ] as const;
 
@@ -35,12 +37,24 @@ export function SitePage() {
         <div className="lg:flex lg:justify-between lg:gap-4">
           <header className="lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-[48%] lg:flex-col lg:justify-between lg:py-24">
             <div>
-              <h1 className="text-4xl font-bold tracking-tight text-snow sm:text-5xl">
-                <Link href="/">{site.name}</Link>
-              </h1>
-              <h2 className="mt-3 text-lg font-medium tracking-tight text-slate-lightest sm:text-xl">
-                {site.role}
-              </h2>
+              <div className="flex items-center gap-5">
+                <Image
+                  src={site.avatar}
+                  alt={`${site.name} — casual portrait in Brooklyn`}
+                  width={128}
+                  height={128}
+                  priority
+                  className="h-20 w-20 shrink-0 rounded-full object-cover ring-2 ring-navy-lightest sm:h-24 sm:w-24 lg:h-28 lg:w-28"
+                />
+                <div>
+                  <h1 className="text-4xl font-bold tracking-tight text-snow sm:text-5xl">
+                    <Link href="/">{site.name}</Link>
+                  </h1>
+                  <h2 className="mt-3 text-lg font-medium tracking-tight text-slate-lightest sm:text-xl">
+                    {site.role}
+                  </h2>
+                </div>
+              </div>
               <p className="mt-4 max-w-xs leading-normal text-slate">
                 {site.tagline}
               </p>
@@ -100,7 +114,52 @@ export function SitePage() {
               </ul>
             </Section>
 
-            <Section id="contact" index="04" label="Contact">
+            <Section id="moments" index="04" label="Moments">
+              {site.moments.length > 0 ? (
+                <ul className="grid grid-cols-2 gap-4">
+                  {site.moments.map((moment) => (
+                    <li key={moment.src}>
+                      <figure>
+                        <div className="relative aspect-[4/5] overflow-hidden rounded-md bg-navy-light ring-1 ring-navy-lightest">
+                          <Image
+                            src={moment.src}
+                            alt={moment.alt}
+                            fill
+                            sizes="(min-width: 1024px) 20vw, 45vw"
+                            className="object-cover"
+                          />
+                        </div>
+                        {moment.caption ? (
+                          <figcaption className="mt-2 text-sm text-slate">
+                            {moment.caption}
+                          </figcaption>
+                        ) : null}
+                      </figure>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <div>
+                  <p className="text-[16px] leading-7 text-slate">
+                    Hiking photos — coming soon.
+                  </p>
+                  <ul className="mt-6 grid grid-cols-2 gap-4" aria-hidden="true">
+                    {["Trail photo", "Summit photo"].map((label) => (
+                      <li
+                        key={label}
+                        className="flex aspect-[4/5] items-end rounded-md border border-dashed border-navy-lightest bg-navy-light/50 p-3"
+                      >
+                        <span className="font-mono text-[11px] tracking-wide text-slate/70 uppercase">
+                          {label}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </Section>
+
+            <Section id="contact" index="05" label="Contact">
               <h3 className="text-xl font-semibold tracking-tight text-snow">
                 {site.contact.heading}
               </h3>

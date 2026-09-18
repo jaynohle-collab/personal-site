@@ -10,6 +10,10 @@
  *
  * In `about` paragraphs you can add teal links with markdown:
  *   [label](https://example.com)
+ *
+ * `avatar` is the circular portrait in the sticky intro (`/public/avatar.png`).
+ * `moments` is the hiking-photo grid; leave it empty until you add files
+ * under `public/photos`.
  */
 
 export type Experience = {
@@ -40,8 +44,17 @@ export type Link = {
   href: string;
 };
 
+export type Moment = {
+  /** Public path, e.g. "/photos/hike.jpg" */
+  src: string;
+  alt: string;
+  caption?: string;
+};
+
 export type Site = {
   name: string;
+  /** Circular portrait in the sticky intro. File lives in /public. */
+  avatar: string;
   role: string;
   tagline: string;
   about: readonly string[];
@@ -56,6 +69,8 @@ export type Site = {
     heading: string;
     body: string;
   };
+  /** Hiking / life photos. Drop files in public/photos and list them here. */
+  moments: readonly Moment[];
   links: readonly Link[];
   footer: string;
   seo: {
@@ -69,6 +84,8 @@ export const site: Site = {
   // Identity — left sticky column
   // ---------------------------------------------------------------------------
   name: "Jay Lee",
+  /** Sticky-intro portrait. Cropped circular photo of the Brooklyn Bridge casual shot. */
+  avatar: "/avatar.png",
   /** Short role line under your name */
   role: "[Software Engineer]",
   /** One sentence under the role. Keep it short enough to wrap to two lines. */
@@ -150,7 +167,14 @@ export const site: Site = {
   ],
 
   // ---------------------------------------------------------------------------
-  // 04. Contact
+  // 04. Moments — hiking / life photos (add files under public/photos)
+  // ---------------------------------------------------------------------------
+  moments: [
+    // { src: "/photos/hike.jpg", alt: "On the trail", caption: "Weekend hike" },
+  ],
+
+  // ---------------------------------------------------------------------------
+  // 05. Contact
   // ---------------------------------------------------------------------------
   contact: {
     heading: "[What’s next?]",
