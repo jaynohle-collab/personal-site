@@ -1,21 +1,19 @@
 # Jay Lee — personal site
 
-A small, personal profile page for [Jay Lee](https://github.com/jaynohle-collab). It is a **fill-in template**: the layout is finished, and every sentence on the page is a placeholder you can replace in one file.
-
-This is not a resume. Career details stay on LinkedIn. This page is for a short about, what you’re into lately, notes, photos, and a few personal links.
+A one-page developer portfolio for [Jay Lee](https://github.com/jaynohle-collab), in a dark two-column layout (sticky intro on the left, scrolling sections on the right). It is a **fill-in template**: the layout is finished, and every sentence on the page is a placeholder you can replace in one file.
 
 ## Edit your content
 
-Open **`content/site.ts`**. That is the only file you need to change for copy, links, notes, photos, and SEO.
+Open **`content/site.ts`**. That is the only file you need to change for copy, links, roles, projects, and SEO.
 
 - Text in `[square brackets]` is a placeholder. Replace the brackets and the example words.
-- `name`, `tagline`, and `about` are the header and intro.
-- `now` is the “what I’m into lately” list (`label` + `text`).
-- `notes` are the writing cards (`title`, `blurb`, `date`). Add `href` when a note has a URL.
-- `photos` start as built-in drawings (`motif`). To use a real picture:
-  1. Put the file in `public/photos/` (for example `public/photos/saturday.jpg`)
-  2. Set `src: "/photos/saturday.jpg"` on that item
-- `links` is the email / LinkedIn / GitHub row. Replace the `[your-handle]` pieces in each `href`.
+- `name`, `role`, and `tagline` are the left column (the sticky intro on desktop).
+- `about` is 2–4 paragraphs. Inline links use markdown: `[label](https://example.com)`.
+- `experience` is the role list (`period`, `title`, `company`, `description`, `tags`, optional `href` and `previousTitles`).
+- `resume` is the “View full résumé” row under experience. Point `href` at a PDF in `/public`, or remove the object to hide it.
+- `projects` are the project cards (`title`, `description`, `tags`, optional `href`).
+- `contact` is the closing invite (`heading` + `body`). The “Say hello” button uses the Email entry in `links`.
+- `links` is GitHub / LinkedIn / Email. Icons are chosen from the label. Replace the `[your-handle]` pieces in each `href`.
 - `seo.description` and `seo.siteUrl` set the browser tab and link-preview text. After you deploy, set `siteUrl` to your live Vercel URL.
 
 Save the file. The homepage updates on the next refresh.
@@ -53,8 +51,8 @@ npm run lint     # lint
 content/site.ts          ← edit this
 src/app/page.tsx         homepage
 src/app/layout.tsx       fonts + SEO
-src/components/          page layout and photo drawings
-public/photos/           drop real photos here
+src/components/          page layout, nav, cards
+public/                  optional résumé PDF, images
 ```
 
 No CMS, no login, no database.

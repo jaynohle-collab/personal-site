@@ -7,47 +7,32 @@
  *
  * After you change this file, the homepage, page title, and SEO tags
  * all update together.
+ *
+ * In `about` paragraphs you can add teal links with markdown:
+ *   [label](https://example.com)
  */
 
-export type NowItem = {
-  /** Small label on the left, e.g. "Reading" or "Cooking" */
-  label: string;
-  /** What you're into — keep it to one line if you can */
-  text: string;
-};
-
-export type Note = {
+export type Experience = {
+  /** Date range shown on the left, e.g. "2024 — Present" */
+  period: string;
+  /** Role title, e.g. "Software Engineer" */
   title: string;
-  /** One-line blurb that sits under the title */
-  blurb: string;
-  /** Displayed as written, e.g. "Sep 2026" or "12 Sep 2026" */
-  date: string;
-  /** Optional. Leave empty until the note has a URL or /notes/slug page. */
+  /** Company or team name */
+  company: string;
+  /** Optional previous titles at the same company */
+  previousTitles?: readonly string[];
+  /** Optional company / role URL. Leave empty to skip the external-link treatment. */
   href?: string;
+  description: string;
+  tags: readonly string[];
 };
 
-/**
- * Built-in illustration for the photo grid (no stock faces).
- * Swap `motif` for `src` when you have a real image in /public/photos.
- */
-export type PhotoMotif =
-  | "window"
-  | "path"
-  | "kitchen"
-  | "desk"
-  | "plant"
-  | "evening";
-
-export type Photo = {
-  /** Shown under the image. Keep the [brackets] until you replace it. */
-  caption: string;
-  /** Use one of the built-in drawings while you collect real photos. */
-  motif?: PhotoMotif;
-  /**
-   * Path under /public, e.g. "/photos/saturday.jpg".
-   * When set, this is used instead of `motif`.
-   */
-  src?: string;
+export type Project = {
+  title: string;
+  description: string;
+  /** Optional project URL (repo, demo, or write-up). */
+  href?: string;
+  tags: readonly string[];
 };
 
 export type Link = {
@@ -57,11 +42,20 @@ export type Link = {
 
 export type Site = {
   name: string;
+  role: string;
   tagline: string;
   about: readonly string[];
-  now: readonly NowItem[];
-  notes: readonly Note[];
-  photos: readonly Photo[];
+  experience: readonly Experience[];
+  /** Shown under the experience list. Omit href to hide the row. */
+  resume?: {
+    label: string;
+    href: string;
+  };
+  projects: readonly Project[];
+  contact: {
+    heading: string;
+    body: string;
+  };
   links: readonly Link[];
   footer: string;
   seo: {
@@ -72,85 +66,117 @@ export type Site = {
 
 export const site: Site = {
   // ---------------------------------------------------------------------------
-  // Identity
+  // Identity — left sticky column
   // ---------------------------------------------------------------------------
   name: "Jay Lee",
-  /** One line under your name. Personal, not a job title. */
-  tagline: "[A one-line personal tagline — how you want to be known]",
+  /** Short role line under your name */
+  role: "[Software Engineer]",
+  /** One sentence under the role. Keep it short enough to wrap to two lines. */
+  tagline:
+    "[A short line about what you build — accessible software, reliable systems, or the web.]",
 
   // ---------------------------------------------------------------------------
-  // About — 2–4 short paragraphs
+  // 01. About — 2–4 paragraphs. Use [label](url) for inline links.
   // ---------------------------------------------------------------------------
   about: [
-    "[Your short bio. A couple of sentences about who you are outside of work — where you live, what you care about, how you like to spend a Sunday.]",
-    "[Another sentence or two. A hobby, a place you keep going back to, or something you're learning just because it's fun.]",
+    "[Hi — a couple of sentences about who you are as an engineer. What you like building, and the details you care about.]",
+    "[Currently you [do X at Company](https://example.com), working on [a product or platform](https://example.com). A sentence on who you partner with and what you try to get right.]",
+    "[Something human for the close. What you do away from the keyboard — a sport, a city, a hobby.]",
   ],
 
   // ---------------------------------------------------------------------------
-  // Now — what you're into lately (not a job update)
+  // 02. Experience — placeholder roles (replace with yours)
   // ---------------------------------------------------------------------------
-  now: [
-    { label: "Reading", text: "[A book, essay, or rabbit hole]" },
-    { label: "Cooking", text: "[Something you're making at home]" },
-    { label: "Listening", text: "[An album, playlist, or quiet habit]" },
-    { label: "Wandering", text: "[A walk, a neighborhood, a small trip]" },
-  ],
-
-  // ---------------------------------------------------------------------------
-  // Notes / writing — title + one-line blurb + date
-  // ---------------------------------------------------------------------------
-  notes: [
+  experience: [
     {
-      title: "[Note title — a small thought]",
-      blurb: "[One line about what this note is.]",
-      date: "Sep 2026",
+      period: "2024 — Present",
+      title: "[Role title]",
+      company: "[Company]",
+      href: "https://example.com",
+      description:
+        "[What you own today. A few sentences on scope, the teams you work with, and a concrete outcome or two.]",
+      tags: ["TypeScript", "React", "Next.js"],
     },
     {
-      title: "[Another note title]",
-      blurb: "[A sentence you'd tell a friend.]",
-      date: "Aug 2026",
+      period: "2021 — 2024",
+      title: "[Previous role]",
+      company: "[Previous company]",
+      previousTitles: ["[Earlier title at the same place]"],
+      href: "https://example.com",
+      description:
+        "[What you built and shipped. Mention the kind of product, the stack, and how you worked with others.]",
+      tags: ["TypeScript", "Node.js", "PostgreSQL", "AWS"],
     },
     {
-      title: "[A third placeholder note]",
-      blurb: "[Replace this when you have something to share.]",
-      date: "Jul 2026",
+      period: "2019 — 2021",
+      title: "[Earlier role]",
+      company: "[Earlier company]",
+      href: "https://example.com",
+      description:
+        "[A shorter summary of an earlier chapter — what you learned or shipped there.]",
+      tags: ["JavaScript", "HTML & CSS", "React"],
+    },
+  ],
+
+  resume: {
+    label: "View full résumé",
+    href: "/[resume].pdf",
+  },
+
+  // ---------------------------------------------------------------------------
+  // 03. Projects — placeholder cards (replace with yours)
+  // ---------------------------------------------------------------------------
+  projects: [
+    {
+      title: "[Featured project]",
+      href: "https://github.com/[your-handle]/[repo]",
+      description:
+        "[What it is, who it’s for, and the interesting part of building it.]",
+      tags: ["Next.js", "TypeScript", "Tailwind"],
+    },
+    {
+      title: "[Another project]",
+      href: "https://github.com/[your-handle]/[repo]",
+      description:
+        "[A tool, app, or experiment. One or two sentences on why it exists.]",
+      tags: ["React", "Node.js"],
+    },
+    {
+      title: "[A third project]",
+      description:
+        "[Leave href off until there’s a public link. A short note is enough.]",
+      tags: ["Python", "SQLite"],
     },
   ],
 
   // ---------------------------------------------------------------------------
-  // Photos / moments — captions + motif (or src when you have files)
-  // Drop real images in /public/photos and set src: "/photos/your-file.jpg"
+  // 04. Contact
   // ---------------------------------------------------------------------------
-  photos: [
-    { caption: "[Morning light]", motif: "window" },
-    { caption: "[A weekend walk]", motif: "path" },
-    { caption: "[Something I cooked]", motif: "kitchen" },
-    { caption: "[Desk, late afternoon]", motif: "desk" },
-    { caption: "[A plant I'm keeping alive]", motif: "plant" },
-    { caption: "[Evening, somewhere quiet]", motif: "evening" },
-  ],
+  contact: {
+    heading: "[What’s next?]",
+    body: "[A short invite. Say you’re open to a note, a question, or a new project — then people will use the email link.]",
+  },
 
   // ---------------------------------------------------------------------------
-  // Personal links — replace the [placeholders] in each href
+  // Social links — icons are chosen from the label (GitHub, LinkedIn, Email)
   // ---------------------------------------------------------------------------
   links: [
-    { label: "Email", href: "mailto:[your.email@example.com]" },
-    { label: "LinkedIn", href: "https://www.linkedin.com/in/[your-handle]" },
     { label: "GitHub", href: "https://github.com/[your-handle]" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/[your-handle]" },
+    { label: "Email", href: "mailto:[your.email@example.com]" },
   ],
 
   // ---------------------------------------------------------------------------
   // Footer
   // ---------------------------------------------------------------------------
-  footer: "[A quiet closing line — or leave this and the year will still show.]",
+  footer: "[Designed & built by Jay Lee]",
 
   // ---------------------------------------------------------------------------
   // SEO — used for the browser tab and link previews
   // ---------------------------------------------------------------------------
   seo: {
-    /** Short description for search results and social previews. */
     description:
-      "[A short personal description for search and link previews — who you are, in one sentence.]",
+      "[Software engineer. A one-sentence description for search and link previews.]",
     /**
      * Your live URL, used for canonical / Open Graph tags.
      * Replace with your Vercel domain after the first deploy.
