@@ -49,6 +49,11 @@ body {
   outline-offset: 3px;
 }
 
+main:focus,
+main:focus-visible {
+  outline: none;
+}
+
 ::-webkit-scrollbar {
   width: 12px;
 }

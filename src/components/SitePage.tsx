@@ -49,7 +49,11 @@ export function SitePage() {
             <SocialLinks className="mt-8 lg:mt-0" />
           </header>
 
-          <main id="content" className="pt-16 lg:w-[52%] lg:py-24" tabIndex={-1}>
+          <main
+            id="content"
+            className="pt-16 outline-none lg:w-[52%] lg:py-24"
+            tabIndex={-1}
+          >
             <Section id="about" index="01" label="About">
               <div className="space-y-4">
                 {site.about.map((paragraph) => (
