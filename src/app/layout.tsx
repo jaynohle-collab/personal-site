@@ -32,11 +32,13 @@ export const metadata: Metadata = {
     siteName: site.name,
     locale: "en_US",
     type: "website",
+    images: [{ url: site.avatar }],
   },
   twitter: {
     card: "summary",
     title: site.name,
     description: site.seo.description,
+    images: [site.avatar],
   },
   robots: {
     index: true,
