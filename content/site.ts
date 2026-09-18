@@ -80,7 +80,7 @@ export const site: Site = {
   // ---------------------------------------------------------------------------
   about: [
     "[Hi — a couple of sentences about who you are as an engineer. What you like building, and the details you care about.]",
-    "[Currently you [do X at Company](https://example.com), working on [a product or platform](https://example.com). A sentence on who you partner with and what you try to get right.]",
+    "Currently you [do X at Company](https://example.com), working on [a product or platform](https://example.com). [A sentence on who you partner with and what you try to get right.]",
     "[Something human for the close. What you do away from the keyboard — a sport, a city, a hobby.]",
   ],
 
