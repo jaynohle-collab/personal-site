@@ -12,8 +12,7 @@
  *   [label](https://example.com)
  *
  * `avatar` is the circular portrait in the sticky intro (`/public/avatar.png`).
- * `moments` is the hiking-photo grid; leave it empty until you add files
- * under `public/photos`.
+ * `moments` is the hiking-photo grid. Files live under `public/photos`.
  */
 
 export type Experience = {
@@ -49,6 +48,8 @@ export type Moment = {
   src: string;
   alt: string;
   caption?: string;
+  /** CSS object-position, e.g. "center top" — keeps faces in a 4:5 crop. */
+  position?: string;
 };
 
 export type Site = {
@@ -170,7 +171,17 @@ export const site: Site = {
   // 04. Moments — hiking / life photos (add files under public/photos)
   // ---------------------------------------------------------------------------
   moments: [
-    // { src: "/photos/hike.jpg", alt: "On the trail", caption: "Weekend hike" },
+    {
+      src: "/photos/hiking-ridge.jpg",
+      alt: "Jay hiking a misty rocky ridge in a blue rain jacket, using trekking poles, with a lake in the trees below",
+      caption: "Ridge walk in the mist.",
+    },
+    {
+      src: "/photos/hiking-summit.jpg",
+      alt: "Jay and a friend on a foggy summit boulder, white cloud behind them",
+      caption: "Summit in the clouds.",
+      position: "center top",
+    },
   ],
 
   // ---------------------------------------------------------------------------

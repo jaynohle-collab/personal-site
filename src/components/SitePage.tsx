@@ -116,21 +116,26 @@ export function SitePage() {
 
             <Section id="moments" index="04" label="Moments">
               {site.moments.length > 0 ? (
-                <ul className="grid grid-cols-2 gap-4">
+                <ul className="grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-5">
                   {site.moments.map((moment) => (
                     <li key={moment.src}>
-                      <figure>
-                        <div className="relative aspect-[4/5] overflow-hidden rounded-md bg-navy-light ring-1 ring-navy-lightest">
+                      <figure className="group">
+                        <div className="relative aspect-[4/5] overflow-hidden rounded-md bg-navy-light ring-1 ring-navy-lightest transition-[box-shadow,ring-color] duration-300 group-hover:ring-slate/25 group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.12)]">
                           <Image
                             src={moment.src}
                             alt={moment.alt}
                             fill
                             sizes="(min-width: 1024px) 20vw, 45vw"
-                            className="object-cover"
+                            className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+                            style={
+                              moment.position
+                                ? { objectPosition: moment.position }
+                                : undefined
+                            }
                           />
                         </div>
                         {moment.caption ? (
-                          <figcaption className="mt-2 text-sm text-slate">
+                          <figcaption className="mt-2.5 text-[13px] leading-normal text-slate">
                             {moment.caption}
                           </figcaption>
                         ) : null}
